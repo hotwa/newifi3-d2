@@ -8,37 +8,26 @@ Build OpenWrt using GitHub Actions
 
 [Read the details in my blog (in Chinese) | 中文教程](https://p3terx.com/archives/build-openwrt-with-github-actions.html)
 
-## Usage
+NEWIFI3
+自动从lean的lede源码clone并生成newifi3固件
 
-- Click the [Use this template](https://github.com/P3TERX/Actions-OpenWrt/generate) button to create a new repository.
-- Generate `.config` files using [Lean's OpenWrt](https://github.com/coolsnowwolf/lede) source code. ( You can change it through environment variables in the workflow file. )
-- Push `.config` file to the GitHub repository.
-- Select `Build OpenWrt` on the Actions page.
-- Click the `Run workflow` button.
-- When the build is complete, click the `Artifacts` button in the upper right corner of the Actions page to download the binaries.
+由于源码更新升级内核和更换了大量软件包，但此仓库配置文件为旧文件，若出现问题请在issue反馈
 
-## Tips
+目前使用的是开源驱动，若需要使用闭源驱动，请按以下说明更改配置
 
-- It may take a long time to create a `.config` file and build the OpenWrt firmware. Thus, before create repository to build your own firmware, you may check out if others have already built it which meet your needs by simply [search `Actions-Openwrt` in GitHub](https://github.com/search?q=Actions-openwrt).
-- Add some meta info of your built firmware (such as firmware architecture and installed packages) to your repository introduction, this will save others' time.
+CONFIG_PACKAGE_kmod-mt7603=y        #取消选中该包
+CONFIG_PACKAGE_kmod-mt7603e=n       #选中该包
+CONFIG_PACKAGE_kmod-mt76x2=y        #取消选中该包
+CONFIG_PACKAGE_kmod-mt76x2-common=y #取消选中该包
+CONFIG_PACKAGE_kmod-mt76x2e=n       #选中该包
 
-## Acknowledgments
+CONFIG_PACKAGE_luci-app-mtwifi=n    #选中该包
+=============================================
 
-- [Microsoft Azure](https://azure.microsoft.com)
-- [GitHub Actions](https://github.com/features/actions)
-- [OpenWrt](https://github.com/openwrt/openwrt)
-- [Lean's OpenWrt](https://github.com/coolsnowwolf/lede)
-- [tmate](https://github.com/tmate-io/tmate)
-- [mxschmitt/action-tmate](https://github.com/mxschmitt/action-tmate)
-- [csexton/debugger-action](https://github.com/csexton/debugger-action)
-- [Cowtransfer](https://cowtransfer.com)
-- [WeTransfer](https://wetransfer.com/)
-- [Mikubill/transfer](https://github.com/Mikubill/transfer)
-- [softprops/action-gh-release](https://github.com/softprops/action-gh-release)
-- [ActionsRML/delete-workflow-runs](https://github.com/ActionsRML/delete-workflow-runs)
-- [dev-drprasad/delete-older-releases](https://github.com/dev-drprasad/delete-older-releases)
-- [peter-evans/repository-dispatch](https://github.com/peter-evans/repository-dispatch)
+本仓库每天UTC 20:00自动拉取源码编译，可直接在action中下载最新固件
 
-## License
+Build Newifi 3
 
-[MIT](https://github.com/P3TERX/Actions-OpenWrt/blob/main/LICENSE) © P3TERX
+固件具体更新内容移步到 https://github.com/coolsnowwolf/lede 查看
+
+固件的默认地址为192.168.99.1，密码默认password
